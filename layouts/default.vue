@@ -1,5 +1,7 @@
 <template>
-  <v-app dark>
+  <v-app :dark="darkTheme">
+
+    <script src="./socket.io/socket.io.js"/>
     <v-navigation-drawer
       :mini-variant="miniVariant"
       :clipped="clipped"
@@ -44,38 +46,17 @@
       </v-btn>
       <v-btn
         icon
-        @click.stop="fixed = !fixed"
+        @click.stop="darkTheme = !darkTheme"
       >
-        <v-icon>remove</v-icon>
+        <v-icon>brightness_7</v-icon>
       </v-btn>
       <v-toolbar-title v-text="title"/>
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>menu</v-icon>
-      </v-btn>
     </v-toolbar>
     <v-content>
       <v-container>
         <nuxt />
       </v-container>
     </v-content>
-    <v-navigation-drawer
-      :right="right"
-      v-model="rightDrawer"
-      temporary
-      fixed
-    >
-      <v-list>
-        <v-list-tile @click.native="right = !right">
-          <v-list-tile-action>
-            <v-icon light>compare_arrows</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Switch drawer (click me)</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
     <v-footer
       :fixed="fixed"
       app
@@ -89,6 +70,7 @@
 export default {
   data() {
     return {
+      darkTheme: false,
       clipped: false,
       drawer: true,
       fixed: false,
@@ -97,9 +79,7 @@ export default {
         { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' }
       ],
       miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
+      title: 'TNU API Dashboard'
     }
   }
 }
